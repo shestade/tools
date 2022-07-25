@@ -49,8 +49,8 @@ namespace meta::tl {
         using type = tl<Ts..., T>;
     };
 
-    template<typename T, typename TL>
-    using push_back_t = typename push_back_impl<T, TL>::type;
+    template<typename TL, typename T>
+    using push_back_t = typename push_back_impl<TL, T>::type;
 
     template <typename TL>
     struct empty_impl : std::false_type {};
@@ -74,7 +74,7 @@ namespace meta::tl {
 
     template <typename TL>
     struct reverse_impl<TL, false> 
-        : push_back_impl<typename reverse_t<tail_t<TL>>, head_t<TL>> {};
+        : push_back_impl<reverse_t<tail_t<TL>>, head_t<TL>> {};
 
     template <typename TL, typename F>
     struct transform_impl;
