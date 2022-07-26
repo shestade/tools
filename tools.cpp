@@ -54,11 +54,11 @@ int main()
 	using namespace std;
 
 	[[maybe_unused]] T<"abc"> t;
-	Person p{meta::arg<"id"> = 1, meta::arg<"name"> = "Denis"};
-	//get<"id">(p) = 1;
-	//get<"name">(p) = "Denis";
+	//Person p{meta::arg<"id"> = 1, meta::arg<"name"> = "Denis"};
+	////get<"id">(p) = 1;
+	////get<"name">(p) = "Denis";
 
-	cout << get<"id">(p) << get<"name">(p);
+	//cout << get<"id">(p) << get<"name">(p);
 
 	cout << "Hello CMake." << endl;
 	auto v = func::compose([](int i) constexpr { return i + 1; })(
