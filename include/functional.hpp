@@ -2,7 +2,7 @@
 
 namespace func {
 
-    auto compose = [](auto&& fn) constexpr {
+    constexpr auto compose = [](auto&& fn) constexpr {
         return[fn = std::forward<decltype(fn)>(fn)](auto&& redex) constexpr {
             return[&](auto in) constexpr {
                 return redex(fn(in));
@@ -10,6 +10,6 @@ namespace func {
         };
     };
 
-    auto identity = [](auto x) constexpr { return x; };
+    constexpr auto identity = [](auto x) constexpr { return x; };
 
-}
+} // namespace func

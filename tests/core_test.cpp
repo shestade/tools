@@ -1,3 +1,6 @@
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+#include <doctest/doctest.h>
+
 #include <type_list.hpp>
 #include <fixed_string.hpp>
 #include <meta_struct.hpp>
@@ -16,7 +19,7 @@ template <typename T>
 struct fop : std::is_same<T, int> {};
 
 [[maybe_unused]]
-void test_typelist() {
+bool test_typelist() {
 	using namespace meta::tl;
 	using t_t = tl<int, double>;
 
@@ -37,6 +40,7 @@ void test_typelist() {
 	>);
 
 	static_assert(std::is_same_v<filter_t<fop, t_t>, tl<int>>);
+	return true;
 }
 
 template <meta::fixed_string S>
@@ -56,21 +60,16 @@ using Person = meta::meta_struct<
 //cout << get<"id">(p) << get<"name">(p);
 
 
-int test_func()
+TEST_CASE("test_func")
 {
 	using namespace std;
 
-	cout << "test func... ";
-	auto v = func::compose([](int i) constexpr { return i + 1; })(
+	constexpr auto v = func::compose([](int i) constexpr { return i + 1; })(
 		func::compose([](int i) constexpr { return i * 2; })(
 			func::identity
 			)
 		);
-	cout << "ok" << endl;
-
-	return v(5);
+	
+	 CHECK(12 == v(5));
 }
 
-int main() {
-	(void)test_func();
-}
