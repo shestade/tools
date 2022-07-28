@@ -73,7 +73,7 @@ int main()
 {
 	using namespace std;
 
-	constexpr auto v = func::compose([](int i) constexpr { return i + 1; })(
+	auto v = func::compose([](int i) constexpr { return i + 1; })(
 		func::compose([](int i) constexpr { return i * 2; })(
 			func::identity
 			)
