@@ -1,6 +1,3 @@
-#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include <doctest/doctest.h>
-
 #include <type_list.hpp>
 #include <fixed_string.hpp>
 #include <meta_struct.hpp>
@@ -59,8 +56,20 @@ using Person = meta::meta_struct<
 
 //cout << get<"id">(p) << get<"name">(p);
 
+#define TEST(x) \
+std::cout << x << "\n"; \
 
-TEST_CASE("test_func")
+
+#define CHECK(x) \
+std::cout << '\t' << #x << "... "; \
+if (x) { \
+	std::cout << "passed\n"; \
+} else { \
+	std::cout << "failed\n"; \
+}
+
+
+int main()
 {
 	using namespace std;
 
@@ -70,6 +79,7 @@ TEST_CASE("test_func")
 			)
 		);
 	
-	 CHECK(12 == v(5));
+	TEST("func")
+	CHECK(12 == v(5));
 }
 
