@@ -6,6 +6,18 @@
 #include <iostream>
 #include <string>
 
+#define TEST(x) \
+std::cout << x << "\n"; \
+
+
+#define CHECK(x) \
+std::cout << '\t' << #x << "... "; \
+if (x) { \
+	std::cout << "passed\n"; \
+} else { \
+	std::cout << "failed\n"; \
+}
+
 template <typename T>
 struct tcmp {
 	template <typename Arg>
@@ -49,28 +61,19 @@ using Person = meta::meta_struct<
 	meta::member<"name", std::string>
 >;
 
-[[maybe_unused]] T<"abc"> t;
-//Person p{meta::arg<"id"> = 1, meta::arg<"name"> = "Denis"};
-////get<"id">(p) = 1;
-////get<"name">(p) = "Denis";
+bool test_metastruct() {
+	TEST("metastruct")
 
-//cout << get<"id">(p) << get<"name">(p);
+	[[maybe_unused]] T<"abc"> t;
+	Person p{meta::arg<"id"> = 1, meta::arg<"name"> = "Denis"};
+	get<"id">(p) = 1;
+	get<"name">(p) = "Denis";
 
-#define TEST(x) \
-std::cout << x << "\n"; \
-
-
-#define CHECK(x) \
-std::cout << '\t' << #x << "... "; \
-if (x) { \
-	std::cout << "passed\n"; \
-} else { \
-	std::cout << "failed\n"; \
+	std::cout << "{" << get<"id">(p) << ", " << get<"name">(p) << "}\n";
+	return true;
 }
 
-
-int main()
-{
+bool test_functional() {
 	using namespace std;
 
 	auto v = func::compose([](int i) constexpr { return i + 1; })(
@@ -78,8 +81,15 @@ int main()
 			func::identity
 			)
 		);
-	
+
 	TEST("func")
 	CHECK(12 == v(5));
+	return true;
+}
+
+int main()
+{
+	test_metastruct();
+	test_functional();
 }
 

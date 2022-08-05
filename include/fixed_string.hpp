@@ -6,6 +6,7 @@
 namespace meta {
     template <std::size_t N>
     struct fixed_string {
+        static constexpr inline auto SIZE = N;
         constexpr fixed_string(const char(&str)[N + 1]) {
             std::copy_n(str, N + 1, data);
         }
