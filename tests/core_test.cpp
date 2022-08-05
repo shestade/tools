@@ -90,6 +90,6 @@ bool test_functional() {
 int main()
 {
 	test_metastruct();
-	test_functional();
+	//test_functional();
 }
 
