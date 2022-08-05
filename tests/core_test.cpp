@@ -64,12 +64,12 @@ using Person = meta::meta_struct<
 bool test_metastruct() {
 	TEST("metastruct")
 
-	[[maybe_unused]] T<"abc"> t;
-	Person p{meta::arg<"id"> = 1, meta::arg<"name"> = "Denis"};
-	get<"id">(p) = 1;
-	get<"name">(p) = "Denis";
+	//[[maybe_unused]] T<"abc"> t;
+	//Person p{meta::arg<"id"> = 1, meta::arg<"name"> = "Denis"};
+	//get<"id">(p) = 1;
+	//get<"name">(p) = "Denis";
 
-	std::cout << "{" << get<"id">(p) << ", " << get<"name">(p) << "}\n";
+	//std::cout << "{" << get<"id">(p) << ", " << get<"name">(p) << "}\n";
 	return true;
 }
 
