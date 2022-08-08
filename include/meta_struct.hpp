@@ -24,7 +24,6 @@ namespace meta {
 
     template <typename... TagValues>
     struct params : TagValues... {
-        using TagValues::TagValues...;
         params(TagValues&&... args) : TagValues(args)... {};
     };
 
