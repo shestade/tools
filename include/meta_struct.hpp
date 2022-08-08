@@ -23,7 +23,10 @@ namespace meta {
     inline constexpr auto arg = arg_type<Tag>{};
 
     template <typename... TagValues>
-    struct params : TagValues... {};
+    struct params : TagValues... {
+        using TagValues::TagValues...;
+        params(TagValues&&... args) : TagValues(args)... {};
+    };
 
     template <typename... Members>
     struct meta_struct_impl : Members... {
@@ -48,7 +51,7 @@ namespace meta {
     struct meta_struct : meta_struct_impl<Members...> {
         using base_type = meta_struct_impl<Members...>;
         template <typename... TagValues>
-        meta_struct(TagValues... tag_values) 
+        meta_struct(TagValues&&... tag_values) 
             : base_type(params(std::move(tag_values)...)) {}
     };
 
